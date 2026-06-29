@@ -1,6 +1,7 @@
 import pandas as pd 
 import streamlit as st
 import yfinance as yf
+import datetime
 
 
 st.write(
@@ -11,13 +12,27 @@ st.write(
     """
 )
 
-ticker_symbol='AAPL'
+
+ticker_symbol=st.text_input("Enter Stock symbol", "AAPL", key='placeholder')
+
+# ticker_symbol='AAPL'
+
+col1,col2=st.columns(2)
+
+
 
 #getting date inputs from the user
+with col1:
+    start_date=st.date_input("Input starting date", datetime.date(2019,1,1))
+with col2:
+    end_date=st.date_input("Input Ending date", datetime.date(2026,12,31))
 
 
 ticker_data=yf.Ticker(ticker_symbol)
-ticker_df=ticker_data.history(period="max", start='2019-01-01',end='2026-06-26')
+ticker_df=ticker_data.history(period="max", start=f"{start_date}",end=f"{end_date}")
+
+st.write(f"""
+### {ticker_symbol}'s EOD prices """)
 
 st.dataframe(ticker_df) 
 
