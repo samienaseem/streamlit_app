@@ -4,7 +4,7 @@ import streamlit as st
 import datetime
 
 
-cars_df=pd.read_csv('./cars24-car-price.csv')
+cars_df=pd.read_csv('cars24-car-price.csv')
 
 st.write(""" ## Cars24 used car price prediction """)
 
